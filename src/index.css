@@ -9,7 +9,11 @@ body {
 
 .mainBody {
   margin-left: 5px;
-  margin-left: 5px;
+  margin-right: 5px;
+}
+
+h1 {
+  font-size: 2rem;
 }
 
 code {

@@ -1,10 +1,13 @@
 import React from 'react'
-import { Container } from '@mui/material'
+import { Container,Typography } from '@mui/material'
+import ProductCard from '../components/ProductCard'
 
 export default function Home() {
   return (
     <div className='mainBody'>
-        Hi
+        <Typography variant="h2">Welcome</Typography>
+        <ProductCard></ProductCard>
+        
     </div>
   )
 }
