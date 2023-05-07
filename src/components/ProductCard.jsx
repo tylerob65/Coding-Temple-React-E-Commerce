@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Card, CardMedia, Typography, CardActionArea} from '@mui/material'
+import { Card, CardMedia, Typography, CardActionArea, Container} from '@mui/material'
 
 export default function ProductCard() {
     const [hoverElevation,setElevation] = useState(4)
@@ -16,9 +16,13 @@ export default function ProductCard() {
     sx={{
         maxWidth:300,
         transition:"box-shadow 0.5s",
+        my:1,
+        mx:2,
+        borderColor:"blue"
+        
     }}
     >
-        <CardActionArea>
+        <CardActionArea sx={{p:1}}>
         <CardMedia
         component="img"
         image="https://m.media-amazon.com/images/I/91UsHjAPTlL.__AC_SY300_SX300_QL70_FMwebp_.jpg"
