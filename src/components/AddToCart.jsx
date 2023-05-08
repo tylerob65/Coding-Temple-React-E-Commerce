@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 export default function AddToCart({productId,user}) {
     
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        
         // const [addSuccessful,setAddSuccessful] = useState(false)
         // const navigate = useNavigate()
 
@@ -15,6 +15,7 @@ export default function AddToCart({productId,user}) {
         //         navigate("/")
         //     }
         // }, [addSuccessful])
+        e.preventDefault();
         
         
         console.log("hi")
@@ -43,7 +44,7 @@ export default function AddToCart({productId,user}) {
     }
   
     return (
-        <form onSubmit={() => handleSubmit()}>
+        <form onSubmit={handleSubmit}>
             <Button type="submit">Add To Cart</Button>
         </form>
 

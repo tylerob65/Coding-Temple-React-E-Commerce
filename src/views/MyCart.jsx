@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export default function MyCart({user}) {
@@ -27,11 +27,13 @@ export default function MyCart({user}) {
             cartInfo.map((item)=>{
                 return (
                     <>
-                    <TableRow>
+                        <TableRow key={item.item_id}>
                         <TableCell><img src={item.image_url} alt="" style={{height:100,objectFit:"contain"}}/></TableCell>
-                        <Link to={`http://127.0.0.1:5000/product/${item.item_id}`}>
-                        <TableCell>{item.product_name}</TableCell>
-                        </Link>
+                        <TableCell>
+                            <Link to={`/product/${item.item_id}`}>
+                                {item.product_name}
+                            </Link>
+                        </TableCell>
                         <TableCell>{item.item_quantity}</TableCell>
                         <TableCell>{item.price}</TableCell>
                         <TableCell>{item.total_item_cost}</TableCell>
@@ -39,7 +41,6 @@ export default function MyCart({user}) {
                                 <form name={item.item_id} onSubmit={handleRemoveFromCart} productid={item.item_id} key={item.item_id}>
                                     <Button type="submit">Remove From Cart</Button>
                                 </form>
-
                             </TableCell>
                     </TableRow>
                     </>
@@ -81,7 +82,30 @@ export default function MyCart({user}) {
             showCart()
         }
         }
+    const handleEmptyCart = async (e) => {
+        e.preventDefault();
+        console.log("got to handleEmptyCart")
+        const body = {
+            userId: user.id,
+        }
+        const url = "http://127.0.0.1:5000/emptycart"
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": 'application/json',
+                Authorization: `Bearer ${user.apitoken}`
+            },
+            body: JSON.stringify(body)
+        }
+        const res = await fetch(url, options);
+        const data = await res.json();
+        console.log(data)
+        if (data.status === 'ok') {
+            getCartInfo()
+            showCart()
+        }
 
+    }
     
 
 
@@ -101,15 +125,26 @@ export default function MyCart({user}) {
             </TableHead>
             <TableBody>
                 {showCart()}
-
             </TableBody>
-
         </Table>
     </TableContainer>
     <br />
-    <form action="">
-        <Button>Empty Cart</Button>
-    </form>
+        {Object.keys(cartInfo).length == 0 ?
+        <>
+        <Container sx={{textAlign:"center"}}>Cart Empty</Container>
+        </>
+        :
+        <>
+        <br />
+        <Container sx={{alignItems:"center",display:"flex",flexDirection:"column"}}>
+        <form onSubmit={handleEmptyCart}>
+            <Button type="submit" variant="contained" color="error">Empty Cart</Button>
+        </form>
+        </Container>
+            
+        </>
+    }
+    
     </>
   )
 }

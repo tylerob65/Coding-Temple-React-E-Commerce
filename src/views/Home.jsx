@@ -30,7 +30,8 @@ export default function Home() {
 
   return (
     <div className='mainBody'>
-        <Typography variant="h2">Welcome</Typography>
+        <Typography variant="h3">Welcome to DactylGoods</Typography>
+        <Typography>Please browse our collection of high end electronics by clicking the cards below!</Typography>
         <Grid container justifyContent='space-around'>
         {showProducts()}
         </Grid>

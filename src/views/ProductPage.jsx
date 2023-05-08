@@ -9,6 +9,7 @@ export default function ProductPage({user}) {
   const [productInfo, setProductInfo] = useState({})
   
   const getProductInfo = async () => {
+    // e.preventDefault();
     const res = await fetch(`http://127.0.0.1:5000/product/${productId}`)
     const data = await res.json()
     if (data.status === "ok") {
@@ -60,7 +61,7 @@ export default function ProductPage({user}) {
 
   return (
     <div className='mainBody'>
-      {productInfo?
+      {Object.keys(productInfo).length!=0?
         <Container sx={{display:"flex",alignItems:"center",flexDirection:"column"}}>
         <Typography variant='h3' textAlign={"center"}>{productInfo.product_name}</Typography>
             <br /> 
@@ -77,11 +78,22 @@ export default function ProductPage({user}) {
             <Box>
             <Typography variant="p"><br /> <b>{productInfo.price}</b><br/> <br /> </Typography>
             </Box>
-            
-          <AddToCart user={user} productId={productId}/>
         </Container>
-        : <CircularProgress/>
+          :
+        <Container sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <CircularProgress sx={{ margin: "auto" }} />
+        </Container>
         }
+      {Object.keys(user).length != 0 && Object.keys(productInfo).length != 0 ?   
+        <Container sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
+          <form onSubmit={handleSubmit}>
+            <Button type="submit" variant='contained'>Add To Cart</Button>
+          </form>
+        </Container>
+        :<>
+        </>
+        }
+      
     </div>
   )
 }
