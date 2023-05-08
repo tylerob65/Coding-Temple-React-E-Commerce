@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Card, CardMedia, Typography, CardActionArea, Container} from '@mui/material'
 
-export default function ProductCard() {
+export default function ProductCard({product}) {
     const [hoverElevation,setElevation] = useState(4)
     // const hoverCardElevation = () => {
     //     setElevation({shadow:3})
@@ -25,7 +25,7 @@ export default function ProductCard() {
         <CardActionArea sx={{p:1}}>
         <CardMedia
         component="img"
-        image="https://m.media-amazon.com/images/I/91UsHjAPTlL.__AC_SY300_SX300_QL70_FMwebp_.jpg"
+        image={product.image_url}
         height="100"
         sx={{
             objectFit:"contain",
@@ -34,8 +34,8 @@ export default function ProductCard() {
         }}
         />
 
-        <Typography variant='h6' sx={{textAlign:"center"}} >The Coolest TV In The World</Typography>
-        <Typography sx={{textAlign:"center"}}>$9000</Typography>
+        <Typography variant='h6' sx={{textAlign:"center"}} >{product.product_name}</Typography>
+        <Typography sx={{textAlign:"center"}}>{product.price}</Typography>
         </CardActionArea>
 
         

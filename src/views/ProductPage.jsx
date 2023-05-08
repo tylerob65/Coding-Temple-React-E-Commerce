@@ -1,7 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Typography, Container, Box, Button } from '@mui/material'
 
 export default function ProductPage() {
+  const [productList, setProductList] = useState([])
+  
+  const getProducts = async () => {
+    const res = await fetch('http://127.0.0.1:5000/products')
+    const data = await res.json()
+    if (data.status === "ok") {
+      setProductList(data.products)
+    }
+
+  }
+
+
   return (
     <div className='mainBody'>
         <Container sx={{display:"flex",alignItems:"center",flexDirection:"column"}}>

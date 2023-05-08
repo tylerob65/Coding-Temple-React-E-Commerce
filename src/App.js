@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <div>
-      <Navbar user={user}/>
+      <Navbar user={user} logMeOut={logMeOut}/>
       <Routes>
         <Route path='/' element={<Home user={user} />} />
         <Route path='/product' element={<ProductPage user={user} />} />

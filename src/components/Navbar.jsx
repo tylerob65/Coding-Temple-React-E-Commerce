@@ -17,7 +17,7 @@ import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-export default function Navbar({user}) {
+export default function Navbar({user, logMeOut}) {
     const [anchorElNav,setAnchorElNav] = useState(null)
     const [anchorElUser,setAnchorElUser] = useState(null);
 
@@ -35,6 +35,35 @@ export default function Navbar({user}) {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const makeDropDownNavMenu = () => {
+
+        console.log(user)
+        if (user != undefined) {
+            return (
+                <>
+            <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">My Cart</Typography>
+                </MenuItem>
+            <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">Logout</Typography>
+            </MenuItem>
+            </>
+            )
+        } else {
+            return (
+                <>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                        <Typography textAlign="center">Login</Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                        <Typography textAlign="center">Sign Up</Typography>
+                    </MenuItem>
+                </>
+            )
+
+        }
+    }
 
 
     return (
@@ -95,8 +124,10 @@ export default function Navbar({user}) {
                             }}
                         >
                             {/* Drop down menu */}
+
+                            {makeDropDownNavMenu()}
                             
-                            {user?
+                            {/* {user?
                             <>
                             <MenuItem onClick={handleCloseNavMenu}>
                                 <Typography textAlign="center">My Cart</Typography>
@@ -114,7 +145,7 @@ export default function Navbar({user}) {
                                 <Typography textAlign="center">Sign Up</Typography>
                             </MenuItem>
                             </>
-                            }
+                            } */}
                             {/* {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">{page}</Typography>
@@ -154,7 +185,10 @@ export default function Navbar({user}) {
                             >My Cart
                             </Button>
                             <Button
-                                onClick={handleCloseNavMenu}
+                                onClick={()=>{
+                                    handleCloseNavMenu()
+                                    logMeOut()
+                                }}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >Logout
                             </Button>
