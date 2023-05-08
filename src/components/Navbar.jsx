@@ -17,7 +17,7 @@ import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-export default function Navbar() {
+export default function Navbar({user}) {
     const [anchorElNav,setAnchorElNav] = useState(null)
     const [anchorElUser,setAnchorElUser] = useState(null);
 
@@ -95,11 +95,31 @@ export default function Navbar() {
                             }}
                         >
                             {/* Drop down menu */}
-                            {pages.map((page) => (
+                            
+                            {user?
+                            <>
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">My Cart</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">Logout</Typography>
+                            </MenuItem>
+                            </>
+                            :
+                            <>
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">Login</Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center">Sign Up</Typography>
+                            </MenuItem>
+                            </>
+                            }
+                            {/* {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
-                            ))}
+                            ))} */}
                         </Menu>
                     </Box>
                     {/* Rocket Icon Small Screens */}
@@ -126,7 +146,38 @@ export default function Navbar() {
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
+                        {user?
+                            <>
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >My Cart
+                            </Button>
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >Logout
+                            </Button>
+
+                            </>
+                            :
+                            <>
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >Login
+                            </Button>
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >Sign In
+                            </Button>
+                            </>
+                        }
+                        {/* {pages.map((page) => (
+
+                        
+
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
@@ -134,7 +185,7 @@ export default function Navbar() {
                             >
                                 {page}
                             </Button>
-                        ))}
+                        ))} */}
                     </Box>
                 </Toolbar>
             </Container>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography,Container, Box, Button } from '@mui/material'
+import { Typography, Container, Box, Button } from '@mui/material'
 
 export default function ProductPage() {
   return (

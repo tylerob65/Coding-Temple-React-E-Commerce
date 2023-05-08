@@ -4,6 +4,8 @@ import Home from "./views/Home";
 import Navbar from "./components/Navbar";
 import { ThemeProvider } from "@mui/material";
 import ProductPage from "./views/ProductPage";
+import SignUpPage from "./views/SignUpPage";
+import LoginPage from "./views/LoginPage";
 
 export default function App() {
   const [user,setUser] = useState({})
@@ -20,10 +22,12 @@ export default function App() {
 
   return (
     <div>
-      <Navbar/>
+      <Navbar user={user}/>
       <Routes>
         <Route path='/' element={<Home user={user} />} />
         <Route path='/product' element={<ProductPage user={user} />} />
+        <Route path='/signup' element={<SignUpPage user={user} />} />
+        <Route path='/login' element={<LoginPage user={user} logMeIn={logMeIn} />} />
       </Routes>
     </div>
   );
