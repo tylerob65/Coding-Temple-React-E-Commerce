@@ -6,8 +6,6 @@ export default function Home() {
   const [productList, setProductList] = useState([])
 
   const showProducts = () => {
-    console.log(productList)
-    const test = [1,2,3]
     return (
         productList.map((product) => {
           return (
@@ -27,27 +25,14 @@ export default function Home() {
   
   useEffect(() => {
     getProducts()
-    showProducts()
   },[])
-
 
   return (
     <div className='mainBody'>
         <Typography variant="h2">Welcome</Typography>
-        <h2>Here is h2</h2>
         <Grid container justifyContent='space-around'>
         {showProducts()}
-              {/* <Grid item><ProductCard /></Grid>
-              <Grid item><ProductCard /></Grid>
-              <Grid item><ProductCard /></Grid>
-              <Grid item><ProductCard /></Grid>
-              <Grid item><ProductCard /></Grid>
-              <Grid item><ProductCard /></Grid> */}
         </Grid>
-        {/* {doThing()} */}
-      <Button onClick={showProducts}>Hello</Button>
-        
-        
     </div>
   )
 }
