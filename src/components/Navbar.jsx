@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import { Link } from 'react-router-dom';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -90,7 +91,12 @@ export default function Navbar({user, logMeOut}) {
                             textDecoration: 'none',
                         }}
                     >
-                        DactylGoods
+                        <Link
+                            style={{ color: "white", textDecoration: "none" }}
+                            to="/"
+                        >
+                            DactylGoods
+                        </Link>
                     </Typography>
                     
                     {/* Menu Small Screens */}
@@ -173,7 +179,12 @@ export default function Navbar({user, logMeOut}) {
                             textDecoration: 'none',
                         }}
                     >
+                        <Link
+                        style={{color: "white" ,textDecoration:"none"}}
+                        to="/"
+                        >
                         DactylGoods
+                        </Link>
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>

@@ -28,6 +28,7 @@ export default function App() {
         <Route path='/product' element={<ProductPage user={user} />} />
         <Route path='/signup' element={<SignUpPage user={user} />} />
         <Route path='/login' element={<LoginPage user={user} logMeIn={logMeIn} />} />
+        <Route path='/product/:productId' element={<ProductPage user={user} />} />
       </Routes>
     </div>
   );
