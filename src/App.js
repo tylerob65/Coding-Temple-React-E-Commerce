@@ -6,6 +6,7 @@ import { ThemeProvider } from "@mui/material";
 import ProductPage from "./views/ProductPage";
 import SignUpPage from "./views/SignUpPage";
 import LoginPage from "./views/LoginPage";
+import MyCart from "./views/MyCart";
 
 export default function App() {
   const [user,setUser] = useState({})
@@ -29,6 +30,7 @@ export default function App() {
         <Route path='/signup' element={<SignUpPage user={user} />} />
         <Route path='/login' element={<LoginPage user={user} logMeIn={logMeIn} />} />
         <Route path='/product/:productId' element={<ProductPage user={user} />} />
+        <Route path='/mycart' element={<MyCart user={user} />} />
       </Routes>
     </div>
   );

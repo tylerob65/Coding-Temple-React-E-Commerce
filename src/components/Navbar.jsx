@@ -47,7 +47,7 @@ export default function Navbar({ user, logMeOut }) {
         if (Object.keys(user).length != 0) {
             return (
                 <>
-                    <Link style={{color:"black",textDecoration:"none"}} to="/"
+                    <Link style={{color:"black",textDecoration:"none"}} to="/mycart"
                     >
                     <MenuItem onClick={handleCloseNavMenu}>
                         <Typography textAlign="center">My Cart</Typography>
@@ -174,7 +174,7 @@ export default function Navbar({ user, logMeOut }) {
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {Object.keys(user).length != 0 ?
                             <>
-                                <Link style={{ color: "white", textDecoration: "none" }} to="/">
+                                <Link style={{ color: "white", textDecoration: "none" }} to="/mycart">
                                 <Button
                                     onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block' }}

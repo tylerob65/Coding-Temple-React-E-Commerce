@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import { Typography, Container, Box, Button, CircularProgress } from '@mui/material'
 import { useParams, Link } from 'react-router-dom'
+import AddToCart from '../components/AddToCart'
 
-export default function ProductPage() {
+export default function ProductPage({user}) {
   const {productId} = useParams()
   
   const [productInfo, setProductInfo] = useState({})
@@ -18,6 +19,43 @@ export default function ProductPage() {
     getProductInfo()
     console.log(productId)
   },[])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // const [addSuccessful,setAddSuccessful] = useState(false)
+    // const navigate = useNavigate()
+
+    // useEffect(() => {
+    //     if (addSuccessful) {
+    //         setAddSuccessful(false)
+    //         navigate("/")
+    //     }
+    // }, [addSuccessful])
+
+    console.log("hi")
+
+    const body = {
+      productId: productId,
+      userId: user.id,
+    }
+    const url = `http://127.0.0.1:5000/additem/${productId}`
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": 'application/json',
+        Authorization: `Bearer ${user.apitoken}`
+      },
+      body: JSON.stringify(body)
+    }
+    const res = await fetch(url, options);
+    const data = await res.json();
+    console.log(data)
+    if (data.status === 'ok') {
+      // setAddSuccessful(true)
+    }
+
+
+  }
 
 
   return (
@@ -40,7 +78,7 @@ export default function ProductPage() {
             <Typography variant="p"><br /> <b>{productInfo.price}</b><br/> <br /> </Typography>
             </Box>
             
-            <Button variant='contained'>Add to cart</Button>
+          <AddToCart user={user} productId={productId}/>
         </Container>
         : <CircularProgress/>
         }
