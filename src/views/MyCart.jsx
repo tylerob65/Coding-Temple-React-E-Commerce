@@ -6,47 +6,61 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, Container } from '@mui/material';
+import { Button, Container, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export default function MyCart({user}) {
     
-    const [cartInfo, setCartInfo] = useState([])
+    const [cartInfo, setCartInfo] = useState({})
     
     const getCartInfo = async () => {
         const res = await fetch(`http://127.0.0.1:5000/mycart/${user.id}`)
         const data = await res.json()
+        
+        const newCartInfo = {
+            cartTotal:data.cartTotal,
+            cart: data.cart,
+        }
+        console.log(newCartInfo,"test")
         if (data.status === "ok") {
-            setCartInfo(data.cart)
+            // setCartInfo(data.cart)
+            setCartInfo(newCartInfo)
             showCart()
         }
     }
 
     const showCart = () => {
+        console.log(cartInfo)
+        console.log(cartInfo.cart)
+        console.log(cartInfo)
+        console.log(cartInfo === {})
+        if (Object.keys(cartInfo).length==0) {
+            
+            console.log("was undefined")
+        } else {
         return (
-            cartInfo.map((item)=>{
+            cartInfo.cart.map((item)=>{
                 return (
-                    <>
-                        <TableRow key={item.item_id}>
-                        <TableCell><img src={item.image_url} alt="" style={{height:100,objectFit:"contain"}}/></TableCell>
+                    <TableRow key={item.item_id}>
+                    <TableCell><img src={item.image_url} alt="" style={{height:100,objectFit:"contain"}}/></TableCell>
+                    <TableCell>
+                        <Link to={`/product/${item.item_id}`}>
+                            {item.product_name}
+                        </Link>
+                    </TableCell>
+                    <TableCell>{item.item_quantity}</TableCell>
+                    <TableCell>{item.price}</TableCell>
+                    <TableCell>{item.total_item_cost}</TableCell>
                         <TableCell>
-                            <Link to={`/product/${item.item_id}`}>
-                                {item.product_name}
-                            </Link>
+                            <form name={item.item_id} onSubmit={handleRemoveFromCart} productid={item.item_id} key={item.item_id}>
+                                <Button type="submit">Remove From Cart</Button>
+                            </form>
                         </TableCell>
-                        <TableCell>{item.item_quantity}</TableCell>
-                        <TableCell>{item.price}</TableCell>
-                        <TableCell>{item.total_item_cost}</TableCell>
-                            <TableCell>
-                                <form name={item.item_id} onSubmit={handleRemoveFromCart} productid={item.item_id} key={item.item_id}>
-                                    <Button type="submit">Remove From Cart</Button>
-                                </form>
-                            </TableCell>
                     </TableRow>
-                    </>
                 )
             })
-        )
+            )
+        }
     }
 
     useEffect(() => {
@@ -111,6 +125,7 @@ export default function MyCart({user}) {
 
   return (
     <>
+    <Container>
     <TableContainer component={Paper}>
         <Table>
             <TableHead>
@@ -128,20 +143,28 @@ export default function MyCart({user}) {
             </TableBody>
         </Table>
     </TableContainer>
+    </Container>
     <br />
         {Object.keys(cartInfo).length == 0 ?
-        <>
-        <Container sx={{textAlign:"center"}}>Cart Empty</Container>
+        <>    
         </>
         :
-        <>
-        <br />
-        <Container sx={{alignItems:"center",display:"flex",flexDirection:"column"}}>
-        <form onSubmit={handleEmptyCart}>
-            <Button type="submit" variant="contained" color="error">Empty Cart</Button>
-        </form>
-        </Container>
-            
+        <>  
+            {Object.keys(cartInfo.cart).length==0?
+            <></>:
+
+            <>
+            <Container>
+                <Typography variant='h5'>Total Cart Price: {cartInfo.cartTotal}</Typography>
+            </Container>
+            <Container sx={{alignItems:"center",display:"flex",flexDirection:"column"}}>
+            <br />
+            <form onSubmit={handleEmptyCart}>
+                <Button type="submit" variant="contained" color="error">Empty Cart</Button>
+            </form>
+            </Container>
+            </>
+            }
         </>
     }
     

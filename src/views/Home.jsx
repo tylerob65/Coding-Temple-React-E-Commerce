@@ -10,7 +10,7 @@ export default function Home() {
     return (
         productList.map((product) => {
           return (
-            <Grid item><ProductCard product={product}/></Grid>
+            <Grid item key={product.id}><ProductCard product={product}/></Grid>
           )
         })
     )}
