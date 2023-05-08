@@ -42,7 +42,7 @@ export default function AddToCart({productId,user}) {
 
 
     }
-  
+
     return (
         <form onSubmit={handleSubmit}>
             <Button type="submit">Add To Cart</Button>
