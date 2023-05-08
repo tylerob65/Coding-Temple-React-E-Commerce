@@ -4,8 +4,11 @@ import { Box } from '@mui/material'
 import { Container } from '@mui/material'
 import { Divider } from '@mui/material'
 import { Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignUpPage() {
+    const navigate = useNavigate()
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const username = e.target.username.value;
@@ -39,6 +42,7 @@ export default function SignUpPage() {
         if (data.status === 'ok') {
             // Show success msg
             console.log(data)
+            navigate('/')
         }
 
 

@@ -1,7 +1,11 @@
 import React from 'react'
 import { Container, TextField, Button } from '@mui/material'
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage({ logMeIn }) {
+
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,6 +27,7 @@ export default function LoginPage({ logMeIn }) {
             const myUserInfo = data.data
             console.log(myUserInfo)
             logMeIn(myUserInfo)
+            navigate("/")
         }
 
         return true
