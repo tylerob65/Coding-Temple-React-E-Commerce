@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Typography, Container, Box, Button, CircularProgress } from '@mui/material'
-import { useParams, Link } from 'react-router-dom'
-import AddToCart from '../components/AddToCart'
+import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 export default function ProductPage({ user }) {
@@ -18,15 +17,13 @@ export default function ProductPage({ user }) {
             setProductInfo(data.product_info)
         }
     }
+    
     useEffect(() => {
         getProductInfo()
-        console.log(productId)
     }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log("hi")
 
         const body = {
             productId: productId,
@@ -43,7 +40,6 @@ export default function ProductPage({ user }) {
         }
         const res = await fetch(url, options);
         const data = await res.json();
-        console.log(data)
         if (data.status === 'ok') {
             navigate("/mycart")
         }

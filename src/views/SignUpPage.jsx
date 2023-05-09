@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { TextField } from '@mui/material'
-import { Box } from '@mui/material'
 import { Container } from '@mui/material'
-import { Divider } from '@mui/material'
 import { Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
@@ -36,7 +34,6 @@ export default function SignUpPage() {
             })
         };
 
-
         const res = await fetch(url, options);
         const data = await res.json();
         if (data.status === 'ok') {
@@ -44,7 +41,6 @@ export default function SignUpPage() {
             console.log(data)
             navigate('/')
         }
-
 
     }
     return (
@@ -108,7 +104,6 @@ export default function SignUpPage() {
                     <Button type='submit' variant='contained' >Submit</Button>
                 </form>
             </Container>
-
         </div>
     )
 }

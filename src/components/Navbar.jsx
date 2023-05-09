@@ -7,16 +7,10 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import { Link, useNavigate } from 'react-router-dom';
-
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function Navbar({ user, logMeOut }) {
     const [anchorElNav, setAnchorElNav] = useState(null)
@@ -41,9 +35,6 @@ export default function Navbar({ user, logMeOut }) {
 
     const makeDropDownNavMenu = () => {
 
-        console.log("print user")
-        console.log(user)
-        console.log(Object.keys(user).length===0)
         if (Object.keys(user).length != 0) {
             return (
                 <div>
@@ -78,7 +69,6 @@ export default function Navbar({ user, logMeOut }) {
                     </Link >
                 </div>
             )
-
         }
     }
 
@@ -210,7 +200,6 @@ export default function Navbar({ user, logMeOut }) {
                                 </Link>
                             </>
                         }
-                        
                     </Box>
                 </Toolbar>
             </Container>

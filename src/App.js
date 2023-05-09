@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import { Routes, Route } from 'react-router-dom';
 import Home from "./views/Home";
 import Navbar from "./components/Navbar";
-import { ThemeProvider } from "@mui/material";
 import ProductPage from "./views/ProductPage";
 import SignUpPage from "./views/SignUpPage";
 import LoginPage from "./views/LoginPage";
@@ -18,8 +17,6 @@ export default function App() {
   const logMeOut = () => {
     setUser({})
   }
-
-  // const theme = ()
 
   return (
     <div>

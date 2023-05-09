@@ -39,11 +39,9 @@ export default function ProductCard({product}) {
             mb:1,
         }}
         />
-
         <Typography variant='h6' sx={{textAlign:"center"}} >{product.product_name}</Typography>
         <Typography sx={{textAlign:"center"}}>{product.price}</Typography>
         </CardActionArea>
-
         
     </Card>
     </Link>

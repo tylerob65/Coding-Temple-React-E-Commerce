@@ -1,6 +1,5 @@
 import React from 'react'
 import { Container, TextField, Button } from '@mui/material'
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage({ logMeIn }) {
@@ -25,7 +24,6 @@ export default function LoginPage({ logMeIn }) {
         const data = await res.json();
         if (data.status === 'ok') {
             const myUserInfo = data.data
-            console.log(myUserInfo)
             logMeIn(myUserInfo)
             navigate("/")
         }
@@ -60,9 +58,7 @@ export default function LoginPage({ logMeIn }) {
                     <br />
                     <Button type='submit' variant='contained'>Submit</Button>
                 </form>
-
             </Container>
-
         </div>
     )
 }

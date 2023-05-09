@@ -22,7 +22,6 @@ export default function MyCart({user}) {
             cartTotal:data.cartTotal,
             cart: data.cart,
         }
-        console.log(newCartInfo,"test")
         if (data.status === "ok") {
             // setCartInfo(data.cart)
             setCartInfo(newCartInfo)
@@ -31,13 +30,8 @@ export default function MyCart({user}) {
     }
 
     const showCart = () => {
-        console.log(cartInfo)
-        console.log(cartInfo.cart)
-        console.log(cartInfo)
-        console.log(cartInfo === {})
         if (Object.keys(cartInfo).length==0) {
             
-            console.log("was undefined")
         } else {
         return (
             cartInfo.cart.map((item)=>{
@@ -64,8 +58,6 @@ export default function MyCart({user}) {
         }
     }
 
-
-
     useEffect(() => {
         getCartInfo()
         showCart()
@@ -73,11 +65,8 @@ export default function MyCart({user}) {
 
     const handleRemoveFromCart = async (e) => {
         e.preventDefault();
-        console.log("got to handleRemoveFromCart")
     
         const productId = e.target.name
-        console.log(e.target.name)
-        console.log(productId)
         const body = {
             productId: productId,
             userId: user.id,
@@ -93,7 +82,6 @@ export default function MyCart({user}) {
         }
         const res = await fetch(url, options);
         const data = await res.json();
-        console.log(data)
         if (data.status === 'ok') {
             getCartInfo()
             showCart()
@@ -101,7 +89,6 @@ export default function MyCart({user}) {
         }
     const handleEmptyCart = async (e) => {
         e.preventDefault();
-        console.log("got to handleEmptyCart")
         const body = {
             userId: user.id,
         }
@@ -116,7 +103,6 @@ export default function MyCart({user}) {
         }
         const res = await fetch(url, options);
         const data = await res.json();
-        console.log(data)
         if (data.status === 'ok') {
             getCartInfo()
             showCart()
@@ -128,7 +114,6 @@ export default function MyCart({user}) {
         setShowAlert(true);
     }
     
-
 
   return (
     <>
