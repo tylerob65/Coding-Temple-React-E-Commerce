@@ -6,12 +6,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, Container, Typography } from '@mui/material';
+import { Alert, Button, Container, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export default function MyCart({user}) {
     
     const [cartInfo, setCartInfo] = useState({})
+    const [showAlert, setShowAlert] =  useState(false)
     
     const getCartInfo = async () => {
         const res = await fetch(`http://127.0.0.1:5000/mycart/${user.id}`)
@@ -62,6 +63,8 @@ export default function MyCart({user}) {
             )
         }
     }
+
+
 
     useEffect(() => {
         getCartInfo()
@@ -118,13 +121,22 @@ export default function MyCart({user}) {
             getCartInfo()
             showCart()
         }
+    }
 
+    const handleCheckout = async (e) => {
+        handleEmptyCart(e);
+        setShowAlert(true);
     }
     
 
 
   return (
     <>
+    {showAlert?
+    <Alert onClose={() => { setShowAlert(false)}}>You successfully Checked Out! Thanks for shopping</Alert>:
+    <></>
+    }
+    
     <Container>
     <TableContainer component={Paper}>
         <Table>
@@ -151,13 +163,19 @@ export default function MyCart({user}) {
         :
         <>  
             {Object.keys(cartInfo.cart).length==0?
-            <></>:
-
+            <Container sx={{textAlign:"center"}}>
+            <Typography> Cart is Empty, Please Continue Shopping</Typography>
+            </Container>
+            :
             <>
             <Container>
                 <Typography variant='h5'>Total Cart Price: {cartInfo.cartTotal}</Typography>
             </Container>
             <Container sx={{alignItems:"center",display:"flex",flexDirection:"column"}}>
+            <br />
+            <form onSubmit={handleCheckout}>
+                <Button type="submit" variant="contained" color="success">Checkout</Button>
+            </form>
             <br />
             <form onSubmit={handleEmptyCart}>
                 <Button type="submit" variant="contained" color="error">Empty Cart</Button>
