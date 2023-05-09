@@ -43,10 +43,10 @@ export default function Navbar({ user, logMeOut }) {
 
         console.log("print user")
         console.log(user)
-        console.log(Object.keys(user).length==0)
+        console.log(Object.keys(user).length===0)
         if (Object.keys(user).length != 0) {
             return (
-                <>
+                <div>
                     <Link style={{color:"black",textDecoration:"none"}} to="/mycart"
                     >
                     <MenuItem onClick={handleCloseNavMenu}>
@@ -61,11 +61,11 @@ export default function Navbar({ user, logMeOut }) {
                         <Typography textAlign="center">Logout</Typography>
                     </MenuItem>
                     
-                </>
+                </div>
             )
         } else {
             return (
-                <>
+                <div>
                     <Link style={{ color: "black", textDecoration: "none" }} to="/login">
                     <MenuItem onClick={handleCloseNavMenu}>
                         <Typography textAlign="center">Login</Typography>
@@ -76,7 +76,7 @@ export default function Navbar({ user, logMeOut }) {
                         <Typography textAlign="center">Sign Up</Typography>
                     </MenuItem>
                     </Link >
-                </>
+                </div>
             )
 
         }
