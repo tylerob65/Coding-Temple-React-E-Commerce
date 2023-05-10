@@ -12,7 +12,7 @@ export default function ProductCard({product}) {
     return (
         
     <Link
-    style={{color:'black',textDecoration:"none"}}
+    style={{color:'black',textDecoration:"none", flexGrow:1,display:"flex"}}
     to={productUrl}
     >
     <Card 
@@ -22,13 +22,16 @@ export default function ProductCard({product}) {
     sx={{
         maxWidth:300,
         transition:"box-shadow 0.5s",
-        my:1,
+        my:1.5,
         mx:2,
-        borderColor:"blue"
-        
+        borderColor:"blue",
+        flexGrow:1,
+        display:"flex",
+        // justifyContent:"space-between",
+        justifyContent:"start",
     }}
     >
-        <CardActionArea sx={{p:1}}>
+        <CardActionArea sx={{p:1,display:"flex",flexDirection:"column", flexGrow:1,justifyContent:"start"}}>
         <CardMedia
         component="img"
         image={product.image_url}

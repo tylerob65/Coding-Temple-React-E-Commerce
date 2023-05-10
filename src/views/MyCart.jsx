@@ -48,7 +48,7 @@ export default function MyCart({user}) {
                     <TableCell>{item.total_item_cost}</TableCell>
                         <TableCell>
                             <form name={item.item_id} onSubmit={handleRemoveFromCart} productid={item.item_id} key={item.item_id}>
-                                <Button type="submit">Remove From Cart</Button>
+                                <Button type="submit">Remove</Button>
                             </form>
                         </TableCell>
                     </TableRow>
@@ -154,16 +154,16 @@ export default function MyCart({user}) {
             :
             <>
             <Container>
-                <Typography variant='h5'>Total Cart Price: {cartInfo.cartTotal}</Typography>
+            <Typography variant='h5'> <i>Total Cart Price: {cartInfo.cartTotal}</i></Typography>
             </Container>
             <Container sx={{alignItems:"center",display:"flex",flexDirection:"column"}}>
             <br />
             <form onSubmit={handleCheckout}>
-                <Button type="submit" variant="contained" color="success">Checkout</Button>
+            <Button type="submit" variant="contained" color="success" sx={{ width: 150 }}>Checkout</Button>
             </form>
             <br />
             <form onSubmit={handleEmptyCart}>
-                <Button type="submit" variant="contained" color="error">Empty Cart</Button>
+            <Button type="submit" variant="contained" color="error" sx={{ width: 150 }}>Empty Cart</Button>
             </form>
             </Container>
             </>

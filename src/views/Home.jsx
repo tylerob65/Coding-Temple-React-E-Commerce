@@ -10,7 +10,7 @@ export default function Home() {
     return (
         productList.map((product) => {
           return (
-            <Grid item key={product.id}><ProductCard product={product}/></Grid>
+            <Grid item key={product.id} sx={{display:"flex"}}><ProductCard product={product}/></Grid>
           )
         })
     )}
@@ -30,9 +30,10 @@ export default function Home() {
 
   return (
     <div className='mainBody'>
-        <Typography variant="h3">Welcome to DactylGoods</Typography>
-        <Typography>Please browse our collection of high end electronics by clicking the cards below!</Typography>
-        <Grid container justifyContent='space-around' alignItems="stretch">
+      <Typography variant="h3" sx={{ textAlign: "center", color:"#1976d2"}}>Welcome to DactylGoods</Typography>
+        <Typography sx={{textAlign:"center"}}>Please browse our collection of high end electronics by clicking the cards below!</Typography>
+        <br />
+        <Grid container justifyContent='space-around'>
         {showProducts()}
         </Grid>
     </div>
