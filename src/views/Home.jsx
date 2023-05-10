@@ -32,7 +32,7 @@ export default function Home() {
     <div className='mainBody'>
         <Typography variant="h3">Welcome to DactylGoods</Typography>
         <Typography>Please browse our collection of high end electronics by clicking the cards below!</Typography>
-        <Grid container justifyContent='space-around'>
+        <Grid container justifyContent='space-around' alignItems="stretch">
         {showProducts()}
         </Grid>
     </div>
