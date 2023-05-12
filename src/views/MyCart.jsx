@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Alert, Button, Container, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default function MyCart({user}) {
     
@@ -96,7 +97,7 @@ export default function MyCart({user}) {
         const options = {
             method: "POST",
             headers: {
-                "Content-Type": 'application/json',
+                // "Content-Type": 'application/json',
                 Authorization: `Bearer ${user.apitoken}`
             },
             body: JSON.stringify(body)
@@ -109,9 +110,47 @@ export default function MyCart({user}) {
         }
     }
 
+    // const handleCheckout = async (e) => {
+    //     handleEmptyCart(e);
+    //     setShowAlert(true);
+    // }
+
     const handleCheckout = async (e) => {
-        handleEmptyCart(e);
-        setShowAlert(true);
+        e.preventDefault();
+        const body = {
+            userId: user.id,
+        }
+        const url = "http://127.0.0.1:5000/checkout"
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": 'application/json',
+                Authorization: `Bearer ${user.apitoken}`,
+                // "Access-Control-Allow-Origin": "http://127.0.0.1:3000"
+            },
+            body: JSON.stringify(body)
+        }
+        const res = await fetch(url, options);
+        // try {
+        //     res = await fetch(url, options);
+        // }
+        // catch (e) {
+        //     console.log(e)
+        // }
+        
+        // const resData = await axios.post(url,body,{headers:options.headers})
+        // console.log(resData)
+        
+        console.log(res)
+        // if (res.redirected) {
+        //     window.location = res.url
+        // }
+        // const data = await res.json();
+        // if (data.status === 'ok') {
+        //     getCartInfo()
+        //     showCart()
+        // }
+
     }
     
 
@@ -164,6 +203,10 @@ export default function MyCart({user}) {
             <br />
             <form onSubmit={handleEmptyCart}>
             <Button type="submit" variant="contained" color="error" sx={{ width: 150 }}>Empty Cart</Button>
+            </form>
+            <br />
+            <form onSubmit={handleCheckout}>
+                <Button type="submit" variant="contained" color="error" sx={{ width: 150 }}>Checkout Cart</Button>
             </form>
             </Container>
             </>
