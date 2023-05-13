@@ -64,6 +64,38 @@ export default function MyCart({user}) {
         showCart()
     }, [])
 
+    useEffect(()=> {
+        const result = new URLSearchParams(window.location.search)
+        console.log(result)
+        if (result.get("success")) {
+            clearCartAfterCheckout()
+        }
+
+    },[])
+
+    const clearCartAfterCheckout = async() => {
+        const body = {
+            userId: user.id,
+        }
+        const url = "http://127.0.0.1:5000/emptycart"
+        const options = {
+            method: "POST",
+            headers: {
+                // "Content-Type": 'application/json',
+                Authorization: `Bearer ${user.apitoken}`
+            },
+            body: JSON.stringify(body)
+        }
+        const res = await fetch(url, options);
+        const data = await res.json();
+        if (data.status === 'ok') {
+            getCartInfo()
+            showCart()
+        }
+
+
+    }
+
     const handleRemoveFromCart = async (e) => {
         e.preventDefault();
     
@@ -160,8 +192,6 @@ export default function MyCart({user}) {
 
     }
 
-    
-
     return (
     <>
     {showAlert?
@@ -218,7 +248,7 @@ export default function MyCart({user}) {
                 {/* <input hidden type="text" name="apitoken" value={user.apitoken}/> */}
                 {/* <input type="text" name="apitoken" value={user.apitoken}/> */}
                 {/* {getAPIKey()} */}
-                <input key={user.apitoken} name="apitoken" value={user.apitoken} />
+                <input readOnly key={user.apitoken} name="apitoken" value={user.apitoken} />
                 <Button type="submit" variant="contained" color="error" sx={{ width: 150 }}>Checkout Cart</Button>
             </form>
             </Container>
