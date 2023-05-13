@@ -110,6 +110,13 @@ export default function MyCart({user}) {
         }
     }
 
+    // const getAPIKey = () => {
+    //     return (
+    //         <input key={ user.apitoken } name="APIKEY" value={user.apitoken}/>
+
+    //     )
+    // }
+
     // const handleCheckout = async (e) => {
     //     handleEmptyCart(e);
     //     setShowAlert(true);
@@ -126,11 +133,11 @@ export default function MyCart({user}) {
             headers: {
                 "Content-Type": 'application/json',
                 Authorization: `Bearer ${user.apitoken}`,
-                // "Access-Control-Allow-Origin": "http://127.0.0.1:3000"
+                // "Access-Control-Allow-Origin": "*"
             },
             body: JSON.stringify(body)
         }
-        const res = await fetch(url, options);
+        // const res = await fetch(url, options);
         // try {
         //     res = await fetch(url, options);
         // }
@@ -138,10 +145,10 @@ export default function MyCart({user}) {
         //     console.log(e)
         // }
         
-        // const resData = await axios.post(url,body,{headers:options.headers})
-        // console.log(resData)
+        const resData = await axios.post(url,body,{headers:options.headers})
+        console.log(resData)
         
-        console.log(res)
+        // console.log(res)
         // if (res.redirected) {
         //     window.location = res.url
         // }
@@ -152,9 +159,10 @@ export default function MyCart({user}) {
         // }
 
     }
+
     
 
-  return (
+    return (
     <>
     {showAlert?
     <Alert onClose={() => { setShowAlert(false)}}>You successfully Checked Out! Thanks for shopping</Alert>:
@@ -205,7 +213,12 @@ export default function MyCart({user}) {
             <Button type="submit" variant="contained" color="error" sx={{ width: 150 }}>Empty Cart</Button>
             </form>
             <br />
-            <form onSubmit={handleCheckout}>
+            {/* <form onSubmit={handleCheckout}> */}
+            <form action="http://127.0.0.1:5000/checkout" method="POST">
+                {/* <input hidden type="text" name="apitoken" value={user.apitoken}/> */}
+                {/* <input type="text" name="apitoken" value={user.apitoken}/> */}
+                {/* {getAPIKey()} */}
+                <input key={user.apitoken} name="apitoken" value={user.apitoken} />
                 <Button type="submit" variant="contained" color="error" sx={{ width: 150 }}>Checkout Cart</Button>
             </form>
             </Container>
